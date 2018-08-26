@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+
+  >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp"
+        android:weightSum="3">
+
+    <EditText
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:layout_weight="2.9"
+        android:hint="Enter Beneficiary Email"
+        android:id="@+id/etEmailTransfer"/>
+    <ImageButton
+        android:layout_marginTop="10dp"
+        android:layout_height="25dp"
+        android:layout_width="25dp"
+        android:text="Check"
+
+        android:background="@drawable/person_check"
+        android:layout_weight="0"
+        android:id="@+id/check"
+        android:onClick="checkClick"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Name: Please check user"
+       android:layout_marginBottom="10dp"
+        android:id="@+id/tvNameTransfer"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Phone: Please check user "
+        android:id="@+id/tvPhoneTransfer"/>
+    <EditText
+        android:layout_marginTop="10dp"
+        android:inputType="number"
+        android:layout_width="match_parent"
+        android:ems="10"
+        android:layout_height="wrap_content"
+        android:id="@+id/etAmountTransfer"
+        android:hint="Enter Amount"/>
+    <EditText
+        android:layout_height="100dp"
+        android:layout_width="match_parent"
+        android:ems="10"
+        android:inputType="number"
+        android:hint="Description"
+        android:id="@+id/etDescriptionTransfer"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:weightSum="2"
+            >
+
+
+            <Button
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:textColor="@color/colorWhite"
+                android:layout_weight="1"
+                android:text="Cancle"
+                android:background="@drawable/button_background"
+                android:enabled="false"
+                android:id="@+id/btnCancle"
+                android:onClick="okClick"
+                android:layout_marginRight="8dp"/>
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:textColor="@color/colorWhite"
+        android:text="OK"
+        android:background="@drawable/button_disable_back"
+        android:enabled="false"
+        android:id="@+id/btOKTransfer"
+        android:onClick="okClick"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
+

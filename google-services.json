@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "258133719703",
+    "firebase_url": "https://mobilebanking-d7c9e.firebaseio.com",
+    "project_id": "mobilebanking-d7c9e",
+    "storage_bucket": "mobilebanking-d7c9e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:258133719703:android:535c6b2906494810",
+        "android_client_info": {
+          "package_name": "tu.thesis.onlinebanking.pk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "258133719703-h4teb7ahe44h5ocpjnraab901c0cmr2e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXXP012ZX2b7u5zk1_5BRSqfxEdNohmG8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

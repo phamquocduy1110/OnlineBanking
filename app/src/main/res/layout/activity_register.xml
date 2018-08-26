@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+
+    android:gravity="center"
+
+
+    android:background="@color/background"
+
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+    <TextView
+        android:textColor="@color/colorWhite"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:text="Register for Mobile Banking Account "
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:id="@+id/tv"
+
+        android:textIsSelectable="true"/>
+
+
+
+    <EditText
+
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorWhite"
+        android:paddingLeft="5dp"
+        android:ems="10"
+
+        android:layout_width="match_parent"
+
+        android:id="@+id/etName"
+
+        android:hint="Name"/>
+
+    <EditText
+
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
+        android:ems="10"
+        android:textColorHint="@color/colorWhite"
+        android:paddingLeft="5dp"
+
+        android:layout_width="match_parent"
+
+        android:id="@+id/etDOB"
+
+        android:hint="Date of Birth"/>
+
+    <EditText
+        android:textColor="@color/colorWhite"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/colorWhite"
+        android:paddingLeft="5dp"
+        android:ems="10"
+        android:inputType="phone"
+        android:layout_width="match_parent"
+
+        android:id="@+id/etPhone"
+
+        android:hint="Phone"/>
+    <EditText
+
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorWhite"
+        android:paddingLeft="5dp"
+
+        android:layout_width="match_parent"
+
+        android:id="@+id/etMail"
+android:inputType="textEmailAddress"
+        android:hint="Email"/>
+
+    <EditText
+
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
+        android:ems="10"
+        android:textColorHint="@color/colorWhite"
+        android:paddingLeft="5dp"
+        android:layout_width="match_parent"
+        android:inputType="textPassword"
+        android:id="@+id/etPass"
+
+        android:hint="Password"/>
+
+    <EditText
+
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
+        android:ems="10"
+        android:textColorHint="@color/colorWhite"
+        android:paddingLeft="5dp"
+        android:layout_width="match_parent"
+        android:inputType="textPassword"
+        android:id="@+id/etRePass"
+
+        android:hint="Re-enter Password"/>
+
+    <EditText
+
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
+        android:ems="10"
+        android:textColorHint="@color/colorWhite"
+        android:paddingLeft="5dp"
+        android:layout_width="match_parent"
+        android:inputType="number"
+        android:id="@+id/etAmount"
+
+        android:hint="Current Amount"/>
+
+    <EditText
+        android:textColor="@color/colorWhite"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/colorWhite"
+        android:paddingLeft="5dp"
+        android:ems="10"
+
+        android:layout_width="match_parent"
+
+        android:id="@+id/etAddress"
+
+        android:hint="Addresss"/>
+
+    <EditText
+        android:textColorHint="@color/colorWhite"
+        android:paddingLeft="5dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
+        android:ems="10"
+
+        android:layout_width="match_parent"
+
+        android:id="@+id/etNationalID"
+
+        android:hint="National ID"/>
+
+
+
+    <Button
+
+        android:layout_height="wrap_content"
+        android:text="Sign up"
+android:textColor="@color/colorWhite"
+        android:layout_width="wrap_content"
+        android:background="@drawable/button_background"
+
+        android:onClick="onClick"/>
+
+
+    </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
+

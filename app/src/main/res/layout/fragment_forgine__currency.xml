@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@color/colorPrimary">
+
+    <Button
+        android:layout_height="wrap_content"
+        android:text="OK"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/colorWhite"
+        android:id="@+id/btn_req"
+        android:textAllCaps="false"
+        android:onClick="onClick"
+        android:layout_margin="20dp"
+        android:background="@drawable/button_background"/>
+
+    <ScrollView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_above="@id/btn_req"
+        android:id="@+id/scroll">
+
+        <TextView
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:padding="20dp"
+            android:text="Please reload"
+            android:textSize="20sp"
+            android:textColor="@color/colorWhite"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/tv"/>
+
+    </ScrollView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
+        android:padding="8sp"
+        android:text="(မွတ္ခ်က္။ ။အထက္ပါ ေငြလဲနုုန္းသည္ အခ်ိန္ႏွင့္အမ ွ် ေျပာင္းလဲႏိုုင္ပါသည္။)"
+        android:layout_above="@id/btn_req"/>
+
+</RelativeLayout>
+
