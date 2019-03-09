@@ -21,7 +21,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Medium Text"
+            android:text="Medium"
             android:layout_alignParentRight="true"
             android:id="@+id/tvAmount"/>
 
@@ -34,6 +34,14 @@
             android:layout_alignParentLeft="true"
             android:id="@+id/tvDescription"
             android:textColor="#6B3E00"/>
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="tex"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_below="@+id/tvAmount"
+            android:id="@+id/tvTex"
+            android:layout_toRightOf="@+id/tvDescription"/>
 
     </RelativeLayout>
 

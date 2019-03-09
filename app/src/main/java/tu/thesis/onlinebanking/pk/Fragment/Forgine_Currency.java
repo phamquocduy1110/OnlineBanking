@@ -29,8 +29,10 @@ public class Forgine_Currency extends Fragment {
 
     String url = "https://openexchangerates.org/api/latest.json?app_id=da124d8303794b239ac25e70ea308d1e";
     StringRequest stringRequest;
-    TextView tv;
-    Button btn_req;
+    String rateMMK,rateEUR,rateJPY,rateCNY,rateINR, rateTHB,rateSGD;
+    TextView tvUSD,tvEUR,tvJPY,tvCNY,tvINR,tvTHB,tvSGD,tvtime;
+    Button btn_req,ok;
+    float mmk=00.0f,eur=0.00f,result=0.00f;
   //  FragmentTransaction fTransaction;
 
     private ProgressDialog pDialog;
@@ -49,8 +51,16 @@ public class Forgine_Currency extends Fragment {
 
         //addListenerOnSpinnerItemSelection();
 
-        tv=(TextView) v.findViewById(R.id.tv);
+        tvUSD=(TextView) v.findViewById(R.id.tvUSD);
+        tvtime = v.findViewById(R.id.time);
+        tvEUR = v.findViewById(R.id.tvEUR);
+        tvJPY = v.findViewById(R.id.tvJPY);
+        tvCNY = v.findViewById(R.id.tvCNY);
+        tvINR = v.findViewById(R.id.tvINR);
+        tvTHB = v.findViewById(R.id.tvTHB);
+        tvSGD = v.findViewById(R.id.tvSGD);
         btn_req = v.findViewById(R.id.btn_req);
+        ok = v.findViewById(R.id.ok);
         pDialog = new ProgressDialog(getActivity());
         pDialog.setCancelable(false);
         pDialog.setMessage("Please wait...");
@@ -70,23 +80,33 @@ public class Forgine_Currency extends Fragment {
                             String date=DateTime.Date(ticks);
                             String time= DateTime.Time(ticks);
                             obj=obj.getJSONObject("rates");
-                            String rate=obj.get("MMK").toString();
-                            String output="Date: "+date+"\n"+"Time: "+
-                                    time+"\n"+
-                                    "US 1$ = ျမန္မာ ေငြ "+rate+" Kyats";
-                            tv.setText(output);
+                             rateMMK=obj.get("MMK").toString();
+                             rateEUR = obj.get("EUR").toString();
+                             rateJPY = obj.get("JPY").toString();
+                             rateCNY = obj.get("CNY").toString();
+                             rateINR = obj.get("INR").toString();
+                             rateTHB = obj.get("THB").toString();
+                             rateSGD = obj.get("SGD").toString();
+
+
+                            String sTime="Date: "+date+"\n"+"Time: "+
+                                    time;
+                           // String mmk = "US 1$ = ျမန္မာ ေငြ "+rateMMK+" Kyats";
+                            tvtime.setText(sTime);
+                            tvUSD.setText( "USD 1$ = ျမန္မာ ေငြ "+rateMMK+" Kyats");
                             hideDialog();
 
                         }
                         catch (JSONException e)
-                        {tv.setText(response);}
+                        {tvtime.setText(response);}
+
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
 
 // Error handling
-                tv.setText(error.toString());
+                tvtime.setText(error.toString());
 
             }
         });
@@ -94,18 +114,61 @@ public class Forgine_Currency extends Fragment {
 
         Volley.newRequestQueue(getActivity()).add(stringRequest);
 
+
+
+
+
         btn_req.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+float jpy=0.00f,cny=0.00f,inr=0.00f,thb=0.00f,sgd=0.00f,jpyResult=0.00f,cnyResult=0.00f,inrResult=0.00f,thbResult=0.00f,sgdResult=0.00f;
 
-                FragmentTransaction fTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                fTransaction.replace(R.id.frame_layout,new Fragment_Main()).commit();
+                mmk = Float.parseFloat(rateMMK);
+                eur = Float.parseFloat(rateEUR);
+                jpy = Float.parseFloat(rateJPY);
+                cny = Float.parseFloat(rateCNY);
+                inr = Float.parseFloat(rateINR);
+                thb = Float.parseFloat(rateTHB);
+                sgd = Float.parseFloat(rateSGD);
+
+                result = mmk/eur;
+                tvEUR.setVisibility(View.VISIBLE);
+
+                jpyResult = mmk/jpy;
+                cnyResult = mmk/cny;
+                inrResult = mmk/inr;
+                thbResult = mmk/thb;
+                sgdResult = mmk/sgd;
+//
+                tvEUR.setText("1 EUR (EURO) = "+result+"  Kyats");
+                tvEUR.setVisibility(View.VISIBLE);
+
+                tvJPY.setText("1 Yen (Japan) = " +jpyResult+" Kyats");
+                tvJPY.setVisibility(View.VISIBLE);
+
+                tvCNY.setText("1 Renminbi (China) = "+cnyResult+" Kyats");
+                tvCNY.setVisibility(View.VISIBLE);
+
+                tvINR.setText("1 Rupees (India) = " +inrResult+" Kyats");
+                tvINR.setVisibility(View.VISIBLE);
+
+                tvTHB.setText("1 Baht (Thailand) = "+thbResult+" Kyats");
+                tvTHB.setVisibility(View.VISIBLE);
+
+                tvSGD.setText("1 Dollar (Singapore) = "+ sgdResult+" Kyats");
+                tvSGD.setVisibility(View.VISIBLE);
 
 
             }
         });
 
-
+ok.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        FragmentTransaction fTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                fTransaction.replace(R.id.frame_layout,new Fragment_Main()).commit();
+    }
+});
 
 
 

@@ -57,12 +57,13 @@ import tu.thesis.onlinebanking.pk.Model.UserModel;
 public class Transfer extends AppCompatActivity {
 
     EditText etEmail,etAmount,etDesc;
-    DatabaseReference refUsers,ref1,ref2;
+    DatabaseReference refUsers,ref1,ref2,refAdmin;
     TextView tvName,tvPhone;
-    Button btOk;
-    TransactionModel model1,model2;
-    String myUid="",otherUid="",myemail,refid,myName;
-    long balance1,balance2;
+    Button btOk,btnCancle;
+    TransactionModel model1,model2,modelAdmin;
+    String myUid="",otherUid="",myemail,refid,myName,adminUid="nqWhqaQZxUWuWxhuKPR4Pdqizdp1";
+    long balance1,balance2,adminBalance,to_send;
+    long tax;
     private ProgressDialog pDialog;
     public static UserModel userData;
     String s = "";
@@ -95,6 +96,8 @@ public class Transfer extends AppCompatActivity {
         refid = Fragment_Main.userData.getUid();
 
         balance1 = getIntent().getLongExtra("balance", 0);
+        to_send = getIntent().getLongExtra("balance", 0);
+
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
 
@@ -107,13 +110,23 @@ public class Transfer extends AppCompatActivity {
         tvName = (TextView)findViewById(R.id.tvNameTransfer);
         tvPhone = (TextView)findViewById(R.id.tvPhoneTransfer);
         btOk = (Button)findViewById(R.id.btOKTransfer);
+        btnCancle = findViewById(R.id.btnCancle);
         btOk.setEnabled(false);
 
 
 
 
         refUsers = FirebaseDatabase.getInstance().getReference("/mbanking/users");
+        refAdmin = FirebaseDatabase.getInstance().getReference("/mbanking/users");
+
         myUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        btnCancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Transfer.super.onBackPressed();
+            }
+        });
 
     }
 
@@ -137,6 +150,7 @@ public class Transfer extends AppCompatActivity {
                             btOk.setBackground(getResources().getDrawable(R.drawable.button_background));
                             model1 = new TransactionModel();
                             model2 = new TransactionModel();
+                          //  modelAdmin =new TransactionModel();
                             balance2 = dss.child("amount").getValue(Long.class);
 
                             tvName.setText(dss.child("name").getValue().toString());
@@ -172,6 +186,7 @@ public class Transfer extends AppCompatActivity {
                 hideDialog();
             }
         });
+
     }
 
     public void okClick(View v)
@@ -179,6 +194,19 @@ public class Transfer extends AppCompatActivity {
 
         String am = etAmount.getText().toString();
         int checkAm = Integer.parseInt(am);
+if (etAmount.getText().equals("")){
+    showMsg("Sorry","Enter amount");
+    return;
+
+}
+if (checkAm<=50000){
+    tax = 300;
+
+}
+if (checkAm <=100000 && checkAm> 50000){
+
+    tax= 600;
+}
 
         if (checkAm > 100000){
             showMsg("Sorry","Limited amount! The maximum amount of transaction is 100000 Ks. Try again");
@@ -192,6 +220,57 @@ public class Transfer extends AppCompatActivity {
 
             return;
         }
+        refAdmin.addListenerForSingleValueEvent(new ValueEventListener(){
+
+            @Override
+            public void onDataChange(DataSnapshot p1)
+            {
+                try
+                {
+                    for (DataSnapshot dss:p1.getChildren())
+                    {
+                        if (dss.child("email").getValue(String.class).equals("finalyearthesis8@gmail.com"))
+                        {
+
+                            modelAdmin =new TransactionModel();
+                            adminBalance = dss.child("amount").getValue(Long.class);
+
+
+                            btOk.setEnabled(true);
+
+                            modelAdmin.date =  System.currentTimeMillis();
+                            modelAdmin.type = 3;
+                            modelAdmin.taxx=0;
+                            modelAdmin.amount=tax;
+                            modelAdmin.email_or_ph= myemail;
+                            //   modelAdmin.description = model1.email_or_ph + " to " + model2.email_or_ph;
+                            //  modelAdmin.amount =
+
+                            break;
+                        }
+                        else {
+
+                        }
+                    }
+                    hideDialog();
+                }
+                catch (Exception e)
+                {
+                    hideDialog();
+                    showMsg("Error", e.toString());
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError p1)
+            {
+                hideDialog();
+            }
+        });
+
+
+
+
 
         final String mailTitle = "One Time Password !";
 
@@ -208,7 +287,7 @@ public class Transfer extends AppCompatActivity {
                     HttpClient httpclient = new DefaultHttpClient();
                     HttpPost httppost = new HttpPost("https://tuthesis.000webhostapp.com/email_server.php");
                     List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
-                    nameValuePairs.add(new BasicNameValuePair("StringOne", myemail));
+                    nameValuePairs.add(new BasicNameValuePair("StringOne", myemail+","+model1.email_or_ph));
                     nameValuePairs.add(new BasicNameValuePair("StringTwo", mailBody));
                     nameValuePairs.add(new BasicNameValuePair("StringThree",mailTitle));
                     httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -229,7 +308,7 @@ public class Transfer extends AppCompatActivity {
 
         thread.start();
         Toast.makeText(getApplicationContext(),"OTP successfully sent to "+ myemail,Toast.LENGTH_LONG).show();
-      //  Toast.makeText(getApplicationContext(),otp_result+"",Toast.LENGTH_LONG).show();
+       // Toast.makeText(getApplicationContext(),otp_result+"",Toast.LENGTH_LONG).show();
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.custom_alerdialog, null);
@@ -247,14 +326,17 @@ public class Transfer extends AppCompatActivity {
                 String textOTP = edt.getText().toString();
                  int OTP =  Integer.parseInt(textOTP);
                 if (OTP== otp_result) {
+                    Toast.makeText(getApplicationContext(),tax+"",Toast.LENGTH_LONG).show();
                     model1.amount = (model2.amount = Long.parseLong("0" + etAmount.getText().toString().trim()));
                     model1.email_or_ph = etEmail.getText().toString().trim();
+                    model1.taxx = tax;
                     model2.email_or_ph=FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
                     model1.description = (model2.description = etDesc.getText().toString());
                     ref1 = FirebaseDatabase.getInstance().getReference("/mbanking/transactions").child(myUid);
                     ref2 = FirebaseDatabase.getInstance().getReference("/mbanking/transactions").child(otherUid);
-
+                  //  refAdmin =
+                    refAdmin = FirebaseDatabase.getInstance().getReference("/mbanking/admin").child(adminUid);
 
 
                     ref1.push()
@@ -262,9 +344,12 @@ public class Transfer extends AppCompatActivity {
 
                     ref2.push()
                             .setValue(model2);
+                    refAdmin.push()
+                            .setValue(modelAdmin);
 
-                    balance1 -= model1.amount;
+                    balance1 -= model1.amount+tax;
                     balance2 += model1.amount;
+                    adminBalance +=tax;
 
                     if (balance1 < model1.amount)
                     {
@@ -278,18 +363,19 @@ public class Transfer extends AppCompatActivity {
                     FirebaseDatabase.getInstance().getReference("/mbanking/users/" + myUid).child("amount").setValue(balance1);
                     FirebaseDatabase.getInstance().getReference("/mbanking/users/" + otherUid).child("amount").setValue(balance2);
 
+                    FirebaseDatabase.getInstance().getReference("/mbanking/users/" + adminUid).child("amount").setValue(adminBalance);
                     hideDialog();
                     String dec = etDesc.getText().toString();
 
 
 
                     String smsText = "You have received "+ model1.amount+" Ks from "
-                            +myemail+" for "+ dec+ " ref: id ";
+                            +myemail+" for "+ dec+" OTP for this transaction is"+ otp_result+"";
 
 
-                    //**************
-                    //Send SMS
-                    //**************
+//                    **************
+//                    Send SMS
+//                    **************
                         try {
                             SmsManager smsManager = SmsManager.getDefault();
                             smsManager.sendTextMessage(tvPhone.getText().toString().trim(),null,smsText,null,null);
@@ -310,6 +396,9 @@ public class Transfer extends AppCompatActivity {
                     in.putExtra("amount",etAmount.getText().toString());
                     in.putExtra("date",nowDate);
                     in.putExtra("description",dec);
+                    in.putExtra("charges",tax);
+                    in.putExtra("balance",balance1);
+                    in.putExtra("mainbalance",to_send);
 
 
                     final String mailT = "New Value Added";

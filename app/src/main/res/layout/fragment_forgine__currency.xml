@@ -1,47 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:background="@color/colorPrimary">
 
-    <Button
-        android:layout_height="wrap_content"
-        android:text="OK"
-        android:layout_width="match_parent"
-        android:layout_alignParentBottom="true"
-        android:textColor="@color/colorWhite"
-        android:id="@+id/btn_req"
-        android:textAllCaps="false"
-        android:onClick="onClick"
-        android:layout_margin="20dp"
-        android:background="@drawable/button_background"/>
+   <TextView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:text="Time"
+       android:padding="10dp"
+       android:id="@+id/time"
+       android:textColor="@color/colorWhite"/>
 
-    <ScrollView
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:layout_above="@id/btn_req"
-        android:id="@+id/scroll">
 
         <TextView
-            android:gravity="center"
+
             android:layout_gravity="center"
-            android:padding="20dp"
-            android:text="Please reload"
+            android:padding="8dp"
+            android:text="USD"
             android:textSize="20sp"
             android:textColor="@color/colorWhite"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:id="@+id/tv"/>
-
-    </ScrollView>
+            android:id="@+id/tvUSD"/>
     <TextView
+
+        android:layout_gravity="center"
+        android:padding="8dp"
+        android:text="EUR"
+        android:visibility="invisible"
+        android:textSize="20sp"
+        android:textColor="@color/colorWhite"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/tvEUR"/>
+    <TextView
+        android:visibility="invisible"
+        android:layout_gravity="center"
+        android:padding="8dp"
+        android:text="JPY"
+        android:textSize="20sp"
+        android:textColor="@color/colorWhite"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/tvJPY"/>
+    <TextView android:visibility="invisible"
+
+        android:layout_gravity="center"
+        android:padding="8dp"
+        android:text="CNY"
+        android:textSize="20sp"
+        android:textColor="@color/colorWhite"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/tvCNY"/>
+    <TextView
+        android:visibility="invisible"
+        android:layout_gravity="center"
+        android:padding="8dp"
+        android:text="INR"
+        android:textSize="20sp"
+        android:textColor="@color/colorWhite"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/tvINR"/>
+    <TextView
+        android:visibility="invisible"
+        android:layout_gravity="center"
+        android:padding="8dp"
+        android:text="THB"
+        android:textSize="20sp"
+        android:textColor="@color/colorWhite"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/tvTHB"/>
+    <TextView
+        android:visibility="invisible"
+        android:layout_gravity="center"
+        android:padding="8dp"
+        android:text="SGD"
+        android:textSize="20sp"
+        android:textColor="@color/colorWhite"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/tvSGD"/>
+
+
+    <TextView
+        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/colorWhite"
         android:padding="8sp"
         android:text="(မွတ္ခ်က္။ ။အထက္ပါ ေငြလဲနုုန္းသည္ အခ်ိန္ႏွင့္အမ ွ် ေျပာင္းလဲႏိုုင္ပါသည္။)"
-        android:layout_above="@id/btn_req"/>
-
-</RelativeLayout>
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+       android:weightSum="3">
+        <Button
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/button_background"
+            android:layout_width="0dp"
+            android:text="OK"
+            android:id="@+id/ok"
+            android:textColor="@color/colorWhite"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.2"/>
+    <Button
+        android:layout_height="wrap_content"
+        android:text="Show other Currency"
+        android:layout_gravity="end"
+        android:layout_width="0dp"
+        android:layout_weight="1.8"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/colorWhite"
+        android:id="@+id/btn_req"
+        android:textAllCaps="false"
+        android:onClick="onClick"
+        android:layout_marginRight="5dp"
+       android:layout_marginLeft="5dp"
+        android:background="@drawable/button_background"/>
+    </LinearLayout>
+</LinearLayout>
 

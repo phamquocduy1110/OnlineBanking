@@ -14,6 +14,7 @@ import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -53,7 +54,13 @@ public class Payment_history extends Fragment {
         View v = inflater.inflate(R.layout.fragment_payment_history, container, false);
         lv=(ListView)v.findViewById(R.id.lvTransactions);
         myId= FirebaseAuth.getInstance().getCurrentUser().getUid();
-        ref= FirebaseDatabase.getInstance().getReference("/mbanking/transactions").child(myId);
+        if (myId.equals("nqWhqaQZxUWuWxhuKPR4Pdqizdp1")){
+           // Toast
+            ref = FirebaseDatabase.getInstance().getReference("/mbanking/admin").child(myId);
+        }
+        else {
+            ref = FirebaseDatabase.getInstance().getReference("/mbanking/transactions").child(myId);
+        }
         if(ref!=null) {
             //  showProgressDialog("Fetching transaction data...");
 ref.addValueEventListener(new ValueEventListener() {
@@ -98,15 +105,28 @@ ref.addValueEventListener(new ValueEventListener() {
             TextView tvDate=(TextView)convertView.findViewById(R.id.tvDateTime);
             TextView tvDescription=(TextView)convertView.findViewById(R.id.tvDescription);
             TextView tvAmount=(TextView)convertView.findViewById(R.id.tvAmount);
+            TextView tvTex = convertView.findViewById(R.id.tvTex);
             TransactionModel model=data.get(position);
 
             tvDate.setText(DateFormat.format(format,model.date));
-            tvDescription.setText(model.description+"\n"+"to "+model.email_or_ph);
+
+
+            tvTex.setText("Tex "+model.taxx);
             String pre="- ";
             if(model.type==0){
                 tvAmount.setTextColor(Color.RED);
-            }else{
+                tvDescription.setText(model.description+"\n"+" to "+model.email_or_ph);
+                tvTex.setTextColor(Color.RED);
+            }else if (model.type==1){
                 tvAmount.setTextColor(Color.GREEN);
+                tvTex.setVisibility(View.INVISIBLE);
+                tvDescription.setText(model.description+"\n"+" from "+model.email_or_ph);
+                pre="+ ";
+            }
+            else {
+                tvAmount.setTextColor(Color.GREEN);
+                tvDescription.setText("Transcation charges"+"\n"+" from "+model.email_or_ph);
+                tvTex.setVisibility(View.INVISIBLE);
                 pre="+ ";
             }
             tvAmount.setText(pre+model.amount+"");

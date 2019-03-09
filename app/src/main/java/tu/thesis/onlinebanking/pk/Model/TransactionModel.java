@@ -8,5 +8,6 @@ public class TransactionModel {
     public String email_or_ph="";
     public String description="";
     public long amount=0;
+    public long taxx =0;
     public TransactionModel(){}
 }

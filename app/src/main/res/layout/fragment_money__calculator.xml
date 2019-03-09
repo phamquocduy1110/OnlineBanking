@@ -43,7 +43,7 @@
         android:layout_marginLeft="20dp">
         <EditText
             android:layout_width="100dp"
-            android:inputType="number"
+            android:inputType="text"
             android:id="@+id/et_cal"
             android:textColor="@color/colorWhite"
             android:layout_height="wrap_content" />

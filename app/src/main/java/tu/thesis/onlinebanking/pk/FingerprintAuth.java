@@ -63,7 +63,7 @@ public class FingerprintAuth extends AppCompatActivity {
              * Intent intent = new Intent(this, DefaultAuthenticationActivity.class);
              * startActivity(intent);
              */
-            textView.setText("Your Device does not have a Fingerprint Sensor");
+           // textView.setText("Your Device does not have a Fingerprint Sensor");
 
             Intent i = new Intent(getApplicationContext(),LoginActivity.class);
             startActivity(i);

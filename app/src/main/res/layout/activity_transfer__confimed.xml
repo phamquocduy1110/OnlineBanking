@@ -188,6 +188,34 @@
                     <TextView
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
+                        android:text="Transfer Charges"
+                        android:paddingLeft="20dp"
+                        android:paddingTop="20dp"
+
+                        />
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="20dp"
+                        android:id="@+id/charges"
+                        android:text=""
+                        android:textStyle="bold"/>
+
+                </LinearLayout>
+                <View
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="#c0c0c0"/>
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="80dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
                         android:text="Description"
                         android:paddingLeft="20dp"
                         android:paddingTop="20dp"

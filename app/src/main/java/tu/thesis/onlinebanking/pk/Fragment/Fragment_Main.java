@@ -98,7 +98,7 @@ hideDialog();
                     bal = Integer.parseInt(myBal);
 
                     if (bal<=1000) {
-                       showMsg("Warning!","Your main balance is lower than 1000 Ks, please top-up ");
+                       showMsg("Warning!","Your main balance is lower than 1000 Ks, please re ");
                        canTransfer=false;
 
                     }
@@ -131,15 +131,11 @@ hideDialog();
                 myBal = tv.getText().toString().trim();
                 bal = Integer.parseInt(myBal);
 
-                if (bal<=1000) {
-                    showMsg("Warning!","Sorry, your main balance is low , so you can't do any transcation process.");
 
-
-                }  else {
                     Intent in=new Intent(getActivity(),PhoneOperator.class);
                     in.putExtra("balance",balance);
                     startActivity(in);
-                  }
+
 
             }
 
@@ -153,7 +149,7 @@ hideDialog();
                 bal = Integer.parseInt(myBal);
 
                 if (bal<=1000) {
-                    showMsg("Warning!","Sorry, your main balance is low , so you can't do any transcation process.");
+                    showMsg("Warning!","Sorry, your main balance is low , so you can't do  transcation process.");
 
 
                 }  else {

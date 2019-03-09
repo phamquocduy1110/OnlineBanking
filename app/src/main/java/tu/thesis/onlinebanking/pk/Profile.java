@@ -3,6 +3,8 @@ package tu.thesis.onlinebanking.pk;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -52,6 +54,7 @@ public class Profile extends AppCompatActivity {
         mToolbar.setTitle("Profile");
         mToolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
         mToolbar.setNavigationIcon(R.drawable.ic_arrow);
+        setSupportActionBar(mToolbar);
         pro_name = findViewById(R.id.pro_name);
         pro_email = findViewById(R.id.pro_email);
         pro_phone = findViewById(R.id.pro_phone);
@@ -85,6 +88,23 @@ public class Profile extends AppCompatActivity {
 
 
 
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case android.R.id.home:
+                super.onBackPressed();
+                break;
+
+        }
+
+        return true;
     }
 
 }

@@ -13,6 +13,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.telephony.SmsManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -143,6 +144,11 @@ public class Bill_Detail_act extends AppCompatActivity {
                 if (otherAmount==true){
                     am=other_amt.getText().toString().trim();
                     checkAm = Integer.parseInt(am);
+                    if (checkAm <500){
+                        Toast.makeText(getApplicationContext(),"Sorry, minimum amount of Top-Up bill is 500 Ks ",Toast.LENGTH_LONG).show();
+                        return;
+
+                    }
 
                 }else {
                     am = tvAm.getText().toString().trim();
@@ -155,10 +161,7 @@ public class Bill_Detail_act extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Enter Phone number",Toast.LENGTH_LONG).show();
                     return;
                 }
-                if (checkAm <500){
-                    Toast.makeText(getApplicationContext(),"Sorry, minimum amount of Top-Up bill is 500 Ks ",Toast.LENGTH_LONG).show();
 
-                }
 
 setTopUp();
 
@@ -173,7 +176,7 @@ setTopUp();
                 //set title
                 .setTitle("Confirm?")
                 //set message
-                .setMessage("Are you sure want to top up"+ am +" to "+ph_num)
+                .setMessage("Are you sure want to top up "+ am +" Ks  to "+ph_num)
                 //set positive button
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
@@ -216,11 +219,20 @@ setTopUp();
                         hideDialog();
 
 
-
+String smsText =" You have successfully Top -up "+ am+ " from mobile financial services.";
 
 
                         showMsg("Success","You have successfully "+  model1.amount + " Ks TopUP to "+ph_num+" for "+description);
+                        try {
+                            SmsManager smsManager = SmsManager.getDefault();
+                            smsManager.sendTextMessage(phone_number.getText().toString().trim(),null,smsText,null,null);
 
+                            Toast.makeText(getApplicationContext(),
+                                            "Notification sent",Toast.LENGTH_LONG).show();
+                        }catch (Exception e){
+
+                            Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_LONG).show();
+                        }
 
 
                     }

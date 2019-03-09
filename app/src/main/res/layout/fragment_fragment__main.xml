@@ -151,7 +151,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Forgine Currency"
+                    android:text="Exchange Currency"
                     android:textColor="@color/colorWhite"
                     android:id="@+id/his"
                     />
@@ -183,7 +183,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Financial Calculator"
+                    android:text="USD Money Calculator"
                     android:id="@+id/template"
                     android:textColor="@color/colorWhite"
                     />

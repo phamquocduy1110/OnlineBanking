@@ -96,6 +96,7 @@ public class Register extends AppCompatActivity {
       showDialog();
        String email = etMail.getText().toString();
        String password = etPass.getText().toString();
+       String Repass = etRePass.getText().toString();
        String nrc = etNationalID.getText().toString();
        String name = etName.getText().toString();
        String phone = etPhone.getText().toString();
@@ -131,7 +132,7 @@ public class Register extends AppCompatActivity {
 
            return;
        }
-       if(etPass != etRePass){
+       if(!password.equals(Repass)){
            hideDialog();
            Toast.makeText(getApplicationContext(),"Password do not match",Toast.LENGTH_SHORT).show();
 
@@ -180,7 +181,7 @@ public class Register extends AppCompatActivity {
                                                        model.uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                                                        ref.child(model.uid).setValue(model);
 
-                                                       showMsg("Signup", "Verification email sent. Please check your email to confirm.");
+                                                       showMsg("Sign Up Success", "Verification email sent. Please check your email to confirm.");
                                                    }
                                                    else
                                                    {
@@ -202,82 +203,7 @@ public class Register extends AppCompatActivity {
 //                                firebaseUser.getUid());
 
                        });
-//
-//        pDialog.setMessage("Registering please wait ...");
-//        showDialog();
-//        FirebaseAuth.getInstance()
-//
-//                .createUserWithEmailAndPassword(etMail.getText().toString(),
-//
-//                        etPass.getText().toString())
-//
-//                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//
-//                    @Override
-//
-//                    public void onComplete( Task<AuthResult> task) {
-//
-//                        if(task.isSuccessful()) {
-//
-//                            final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//
-//                            user.sendEmailVerification()
-//
-//                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-//
-//                                        @Override
-//
-//                                        public void onComplete(Task<Void> task) {
-//
-//                                            if (task.isSuccessful()) {
-//
-//                                                tv.setText("Verification email sent. "+
-//
-//                                                        "Please check your email to confirm.");
-//                                                hideDialog();
-//
-//                                                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-//
-//                                                        .setDisplayName(etName.getText().toString()).build();
-//
-//                                                user.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
-//
-//                                                    @Override
-//
-//                                                    public void onComplete(Task<Void> task) {
-//
-//                                                        if (task.isSuccessful()) {
-//
-//                                                            addUserToDatabase(user);
-//
-//                                                        }
-//
-//                                                    }
-//
-//                                                });
-//
-//                                            }else{
-//
-//                                                tv.setText("Sign Up: Verification email error.");
-//                                                hideDialog();}
-//
-//                                        }
-//
-//                                    });
-//
-//                        }else{
-//
-//
-//
-//                            tv.setText("Registration NOT succeeded");
-//                            hideDialog();
-//
-//                        }
-//
-//                    }
-//
-//                });
-//
+
    }
 
 

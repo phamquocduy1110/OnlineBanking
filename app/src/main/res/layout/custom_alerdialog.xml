@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:textStyle="bold"
         android:gravity="center"
-        android:text="One Time password have been generated and sent to your gmail. Please type this code correctly in one minutes."/>
+        android:text="One Time password have been generated and sent to your gmail. Please type this code correctly in three minutes."/>
 
     <EditText
         android:layout_marginTop="20dp"

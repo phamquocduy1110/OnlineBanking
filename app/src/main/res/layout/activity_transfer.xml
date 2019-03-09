@@ -72,7 +72,7 @@
         android:layout_height="100dp"
         android:layout_width="match_parent"
         android:ems="10"
-        android:inputType="number"
+        android:inputType="text"
         android:hint="Description"
         android:id="@+id/etDescriptionTransfer"/>
         <LinearLayout
@@ -91,7 +91,7 @@
                 android:layout_weight="1"
                 android:text="Cancle"
                 android:background="@drawable/button_background"
-                android:enabled="false"
+
                 android:id="@+id/btnCancle"
                 android:onClick="okClick"
                 android:layout_marginRight="8dp"/>

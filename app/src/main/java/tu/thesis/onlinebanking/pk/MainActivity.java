@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.ActivityCompat;
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA,Manifest.permission.USE_FINGERPRINT,
-        Manifest.permission.SEND_SMS,Manifest.permission.READ_CONTACTS},00);
+        Manifest.permission.SEND_SMS,Manifest.permission.READ_CONTACTS,Manifest.permission.CALL_PHONE},00);
 
 
 
@@ -139,6 +140,60 @@ public class MainActivity extends AppCompatActivity
             final AlertDialog dialog = custom.create();
             dialog.show();
             dialog.setCanceledOnTouchOutside(true);
+
+        }else if (id == R.id.nav_contact){
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Contact");
+            builder.setMessage("If you have any troubleshoot using our system, you can contact to Customer Services via..");
+
+            // add the buttons
+            builder.setPositiveButton("Email", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+                    emailIntent.setType("text/plain");
+                    emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{  "phyoeko.tutgo@gmail.com"});
+                    emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Services Report");
+                    emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Add your inconvenience");
+
+
+                    emailIntent.setType("message/rfc822");
+
+                    try {
+                        startActivity(Intent.createChooser(emailIntent,
+                                "Send email using..."));
+                    } catch (android.content.ActivityNotFoundException ex) {
+                        Toast.makeText(getApplicationContext(),
+                                "No email clients installed.",
+                                Toast.LENGTH_SHORT).show();
+                    }
+
+
+                }
+            });
+            builder.setNeutralButton("Phone", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    Intent intent = new Intent(Intent.ACTION_CALL);
+                    intent.setData(Uri.parse("tel:09782561428" ));
+                    startActivity(intent);
+
+
+                }
+            });
+            builder.setNegativeButton("Message", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("sms:09782561428")));
+                }
+            });
+
+            // create and show the alert dialog
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
 
         }
         else  if (id==R.id.nav_logout){
